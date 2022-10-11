@@ -36,8 +36,10 @@ public class Controller {
     input.nextLine();
     int numCols = input.nextInt();
     // move down
+    input.nextLine();
     this.currentRow = input.nextInt();
     // move down
+    input.nextLine();
     this.currentCol = input.nextInt();
     // move down
     input.nextLine();
@@ -54,6 +56,75 @@ public class Controller {
         this.map[i] = new Scene(imageName, up, right, down, left, description);
     }
 
+    // find the current scene
+    this.currentScene = this.findScene(this.currentRow, this.currentCol);
+    //set the corrent picture
+    this.theView.setImage(this.currentScene.getImage());
+
    }
+
+private Scene findScene(int row, int col) {
+    for (int i = 0; i < this.map.length; i++) {
+        // grab the scene row and col
+        int sceneRow = this.map[i].getRow();
+        int sceneCol = this.map[i].getCol();
+        // did we find the scene?
+        if(sceneRow == row && sceneCol == col){
+            return this.map[i];
+        }
+    }
+    // didn't find the scene
+    return null;
+}
+
+public void moveUp(){
+    // can we move up?
+    if(this.currentScene.canMoveUp()){
+        // move up
+        this.currentRow--;
+        // find new scene
+        this.currentScene = findScene(this.currentRow, this.currentCol);
+        // update picture
+        this.theView.setImage(this.currentScene.getImage());
+    }
+}
+
+public void moveRight(){
+    // can we move right?
+    if(this.currentScene.canMoveRight()){
+        // move right
+        this.currentCol++;
+        // find new scene
+        this.currentScene = findScene(this.currentRow, this.currentCol);
+        // update picture
+        this.theView.setImage(this.currentScene.getImage());
+    }
+}
+
+public void moveLeft(){
+    // can we move left?
+    if(this.currentScene.canMoveLeft()){
+        // move left
+        this.currentCol--;
+        // find new scene
+        this.currentScene = findScene(this.currentRow, this.currentCol);
+        // update picture
+        this.theView.setImage(this.currentScene.getImage());
+    }
+}
+
+public void moveDown(){
+    // can we move down?
+    if(this.currentScene.canMoveDown()){
+        // move down
+        this.currentRow++;
+        // find new scene
+        this.currentScene = findScene(this.currentRow, this.currentCol);
+        // update picture
+        this.theView.setImage(this.currentScene.getImage());
+    }
+}
+
+
     
 }

@@ -26,6 +26,7 @@ public class MainScreen extends JFrame implements ActionListener{
   public MainScreen(){
     // create and add everything to the screen
     initializeComponents();
+    this.controller = new Controller("pics.txt", this);
     
   }
   
@@ -102,9 +103,25 @@ public class MainScreen extends JFrame implements ActionListener{
     // determine the action command
     String command = e.getActionCommand();
     // use a switch case to do the movement
-    
+    if(command.equals("north")){
+      this.controller.moveUp();
+    }else if(command.equals("east")){
+      this.controller.moveRight();
+    }if(command.equals("south")){
+      this.controller.moveDown();
+    }if(command.equals("west")){
+      this.controller.moveLeft();
+    }
     
 
+  }
+
+
+
+
+
+  public void setImage(BufferedImage image) {
+    this.picturePanel.setImage(image);
   }
 
 }
